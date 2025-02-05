@@ -1,0 +1,19 @@
+﻿# Ignorera systemfiler
+*.log
+*.ini
+*.blf
+*.regtrans-ms
+
+# Ignorera användardata
+.DS_Store
+.vscode/
+*.vs/
+*.vsdx
+
+# Ignorera bin & obj mappar (för C#-projekt)
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.user
