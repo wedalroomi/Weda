@@ -1,0 +1,89 @@
+﻿@page "/newuser"
+@using Microsoft.AspNetCore.Components.Forms
+@using BlazorApp4.Services
+@inject IUserService UserService
+
+<div class="container">
+    <h1 class="mt-4">New User</h1>
+    <p>Please enter the user details below.</p>
+
+    @if (isSaved)
+    {
+        <div class="alert alert-success">
+            <p><strong>Success!</strong> You have saved the following user:</p>
+            <p><strong>Name:</strong> @savedUser.Name</p>
+            <p><strong>Email:</strong> @savedUser.Email</p>
+            <p><strong>Address:</strong> @savedUser.Address.Street, @savedUser.Address.City</p>
+            <p><strong>Company:</strong> @savedUser.Company.Name</p>
+            <button class="btn btn-secondary mt-2" @onclick="ResetForm">Add Another User</button>
+        </div>
+    }
+    else
+    {
+        <EditForm Model="@user" OnValidSubmit="SaveUser">
+            <DataAnnotationsValidator />
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input id="name" class="form-control" @bind="user.Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input id="email" type="email" class="form-control" @bind="user.Email" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="street" class="form-label">Street:</label>
+                <input id="street" class="form-control" @bind="user.Address.Street" />
+            </div>
+
+            <div class="mb-3">
+                <label for="city" class="form-label">City:</label>
+                <input id="city" class="form-control" @bind="user.Address.City" />
+            </div>
+
+            <div class="mb-3">
+                <label for="company" class="form-label">Company Name:</label>
+                <input id="company" class="form-control" @bind="user.Company.Name" />
+            </div>
+
+            <button type="submit" class="btn btn-success">Save</button>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private bool isSaved = false;
+
+    private User user = new User
+        {
+            Address = new Address(),
+            Company = new Company()
+        };
+
+    private User? savedUser;
+
+    private void SaveUser()
+    {
+        UserService.AddUser(user);
+        savedUser = user;
+        isSaved = true;
+
+        user = new User
+            {
+                Address = new Address(),
+                Company = new Company()
+            };
+    }
+
+    private void ResetForm()
+    {
+        user = new User
+            {
+                Address = new Address(),
+                Company = new Company()
+            };
+        isSaved = false;
+    }
+}
