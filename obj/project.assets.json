@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Weda\\source\\repos\\BlazorApp4\\BlazorApp4.csproj",
+      "projectUniqueName": "C:\\Users\\Weda\\source\\repos\\Weda\\BlazorApp4.csproj",
       "projectName": "BlazorApp4",
-      "projectPath": "C:\\Users\\Weda\\source\\repos\\BlazorApp4\\BlazorApp4.csproj",
+      "projectPath": "C:\\Users\\Weda\\source\\repos\\Weda\\BlazorApp4.csproj",
       "packagesPath": "C:\\Users\\Weda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Weda\\source\\repos\\BlazorApp4\\obj\\",
+      "outputPath": "C:\\Users\\Weda\\source\\repos\\Weda\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Weda\\AppData\\Roaming\\NuGet\\NuGet.Config",
