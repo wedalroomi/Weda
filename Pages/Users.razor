@@ -1,0 +1,52 @@
+﻿@page "/users"
+@using BlazorApp4.Services
+@inject IUserService UserService
+
+<h3>Users</h3>
+
+@if (isLoading)
+{
+    <p>Loading user data...</p>
+}
+else
+{
+    <button @onclick="ShowAllUsers">Show All Users</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in displayedUsers)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Address.Street, @user.Address.City</td>
+                    <td>@user.Company.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<User> displayedUsers = new();
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000); // Simulerar laddning
+        displayedUsers = UserService.GetUsers().Take(5).ToList(); // Visa bara de första 5
+        isLoading = false;
+    }
+
+    private void ShowAllUsers()
+    {
+        displayedUsers = UserService.GetUsers(); // Visa alla användare
+    }
+}
